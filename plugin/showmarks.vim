@@ -206,7 +206,7 @@ endf
 " Description: Verify the validity of a showmarks_text{upper,lower,other} setup variable.
 " Default to ">" if it is found to be invalid.
 fun! s:VerifyText(which)
-	if strlen(g:showmarks_text{a:which}) == 0 || strlen(g:showmarks_text{a:which}) > 2
+	if strlen(g:showmarks_text{a:which}) > 2
 		echohl ErrorMsg
 		echo "ShowMarks: text".a:which." must contain only 1 or 2 characters."
 		echohl None
@@ -229,7 +229,7 @@ fun! s:ShowMarksSetup()
 	while n < s:maxmarks
 		let c = strpart(s:all_marks, n, 1)
 		let nm = s:NameOfMark(c)
-		let text = '>'.c
+		let text = c
 		let lhltext = ''
 		if c =~# '[a-z]'
 			if strlen(g:showmarks_textlower) == 1
